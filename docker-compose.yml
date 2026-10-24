@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE:-postgres:18}
+    container_name: ${POSTGRES_CONTAINER:-bi_cards_postgres}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cards_oltp}
+      POSTGRES_USER: ${POSTGRES_USER:-bi_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local}
+      TZ: ${TZ:-America/Lima}
+      PGTZ: ${TZ:-America/Lima}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./database/bootstrap:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bi_admin} -d ${POSTGRES_DB:-cards_oltp}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    networks:
+      - bi_network
+
+networks:
+  bi_network:
+    name: bi_card_network
+
+volumes:
+  postgres_data:
+    name: bi_card_postgres_data

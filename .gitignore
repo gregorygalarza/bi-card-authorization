@@ -1,0 +1,34 @@
+# Secrets
+.env
+*.env.local
+
+# Raw datasets
+data/raw/*
+!data/raw/.gitkeep
+
+# Logs / temp
+logs/*
+!logs/.gitkeep
+*.log
+tmp/
+temp/
+
+# Docker / DB local state
+postgres-data/
+pgadmin-data/
+
+# Pentaho local/generated
+.kettle/
+*.ktr~
+*.kjb~
+*.bak
+
+# Power BI temp
+*.pbix.tmp
+*.pbit.tmp
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
