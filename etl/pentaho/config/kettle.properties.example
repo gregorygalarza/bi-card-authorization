@@ -1,0 +1,17 @@
+# ============================================================
+# BI Card Authorization - Pentaho local variables
+# Copy these values to your local kettle.properties.
+# DO NOT commit real passwords.
+# ============================================================
+
+BI_PROJECT_DIR=CHANGE_ME_PROJECT_DIR
+BI_DATA_DIR=${BI_PROJECT_DIR}/data/raw
+
+BI_DB_HOST=localhost
+BI_DB_PORT=5432
+BI_OLTP_DB=cards_oltp
+BI_DB_USER=bi_admin
+BI_DB_PASSWORD=CHANGE_ME_FROM_DOT_ENV
+
+BI_SOURCE_SYSTEM=IBM_CORE
+BI_RULESET_VERSION=1
