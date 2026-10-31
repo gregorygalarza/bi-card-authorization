@@ -232,13 +232,13 @@ CREATE TABLE IF NOT EXISTS oltp.card (
 -- ------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS oltp.merchant (
-    merchant_id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    source_system_id         SMALLINT      NOT NULL,
-    source_merchant_key      VARCHAR(150)  NOT NULL,
-    merchant_name            VARCHAR(250),
-    active_flag              BOOLEAN       NOT NULL DEFAULT TRUE,
-    created_at               TIMESTAMPTZ   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at               TIMESTAMPTZ   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    merchant_id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    source_system_id            SMALLINT      NOT NULL,
+    source_merchant_key         VARCHAR(150)  NOT NULL,
+    merchant_source_identifier  VARCHAR(250),
+    active_flag                 BOOLEAN       NOT NULL DEFAULT TRUE,
+    created_at                  TIMESTAMPTZ   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ   NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_merchant_source_system
         FOREIGN KEY (source_system_id)
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS oltp.merchant_location (
     source_location_key      VARCHAR(250)  NOT NULL,
     country_code             CHAR(2)       NOT NULL,
     city                     VARCHAR(100),
-    state                    VARCHAR(100),
+    region_code              VARCHAR(100),
     postal_code              VARCHAR(30),
     latitude                 NUMERIC(9,6),
     longitude                NUMERIC(9,6),
@@ -272,6 +272,12 @@ CREATE TABLE IF NOT EXISTS oltp.merchant_location (
 
     CONSTRAINT uq_merchant_location_source
         UNIQUE (merchant_id, source_location_key),
+
+    CONSTRAINT ck_merchant_location_region_code
+    CHECK (
+        region_code IS NULL
+        OR region_code ~ '^[A-Z]{2}$'
+    ),
 
     CONSTRAINT ck_merchant_location_latitude
         CHECK (latitude IS NULL OR latitude BETWEEN -90 AND 90),

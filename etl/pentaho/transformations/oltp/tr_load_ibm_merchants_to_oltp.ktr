@@ -516,7 +516,7 @@
     NULLIF(
         BTRIM(merchant_name_raw),
         ''
-    )::varchar(250) AS merchant_name,
+    )::varchar(250) AS merchant_source_identifier,
 
     TRUE AS active_flag,
 
@@ -584,11 +584,11 @@ ORDER BY source_merchant_key;</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>merchant_name</name>
+        <name>merchant_source_identifier</name>
         <length>250</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>merchant_name</comments>
+        <comments>merchant_source_identifier</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -705,8 +705,8 @@ ORDER BY source_merchant_key;</sql>
         <update>N</update>
       </value>
       <value>
-        <name>merchant_name</name>
-        <rename>merchant_name</rename>
+        <name>merchant_source_identifier</name>
+        <rename>merchant_source_identifier</rename>
         <update>Y</update>
       </value>
       <value>

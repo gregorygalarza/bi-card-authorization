@@ -430,7 +430,7 @@
     <created_date>2026/10/29 04:04:18.537</created_date>
     <modified_user>-</modified_user>
     <modified_date>2026/10/29 04:04:18.537</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -493,6 +493,95 @@
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>cards_oltp</connection>
+    <commit>5000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>oltp</schema>
+      <table>merchant_location</table>
+      <key>
+        <name>merchant_id</name>
+        <field>merchant_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>source_location_key</name>
+        <field>source_location_key</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>merchant_id</name>
+        <rename>merchant_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>source_location_key</name>
+        <rename>source_location_key</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>country_code</name>
+        <rename>country_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>city</name>
+        <rename>city</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>region_code</name>
+        <rename>region_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>postal_code</name>
+        <rename>postal_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>latitude</name>
+        <rename>latitude</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>longitude</name>
+        <rename>longitude</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>active_flag</name>
+        <rename>active_flag</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -563,23 +652,44 @@ classified AS (
         p.*,
 
         CASE
+            -- Sin geografía informada: principalmente ONLINE.
+            WHEN p.state_norm = ''
+                THEN 'ZZ'::char(2)
+
+            -- Código territorial estadounidense.
             WHEN EXISTS (
                 SELECT 1
                 FROM ctl.us_state_code u
                 WHERE u.state_code = p.state_norm
             )
-            THEN 'US'::char(2)
+                THEN 'US'::char(2)
 
-            ELSE (
-                SELECT b.country_code
-                FROM ctl.merchant_country_bucket b
-                WHERE ctl.fn_bucket_100(p.location_seed)
-                      BETWEEN b.bucket_from AND b.bucket_to
-                LIMIT 1
+            -- Nombre de país que coincide directamente con catálogo.
+            -- Si no coincide, resolver mediante alias IBM.
+            ELSE COALESCE(
+                c.country_code,
+                a.country_code
             )
-        END AS country_code
+        END AS country_code,
+
+        CASE
+            WHEN EXISTS (
+                SELECT 1
+                FROM ctl.us_state_code u
+                WHERE u.state_code = p.state_norm
+            )
+                THEN p.state_norm
+            ELSE NULL
+        END::varchar(10) AS region_code
 
     FROM prepared p
+
+    LEFT JOIN oltp.country c
+      ON UPPER(c.country_name) = p.state_norm
+
+    LEFT JOIN ctl.country_name_alias a
+      ON a.source_system = 'IBM_CORE'
+     AND UPPER(a.source_country_name) = p.state_norm
 )
 
 SELECT
@@ -597,7 +707,7 @@ SELECT
         ELSE COALESCE(c.city_original, c.city_norm)
     END::varchar(100) AS city,
 
-    NULLIF(c.state_norm, '')::varchar(100) AS state,
+    c.region_code,
 
     NULLIF(c.postal_norm, '')::varchar(30) AS postal_code,
 
@@ -718,11 +828,11 @@ ORDER BY
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>state</name>
-        <length>100</length>
+        <name>region_code</name>
+        <length>10</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>state</comments>
+        <comments>region_code</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -841,95 +951,6 @@ ORDER BY
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>cards_oltp</connection>
-    <commit>5000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>oltp</schema>
-      <table>merchant_location</table>
-      <key>
-        <name>merchant_id</name>
-        <field>merchant_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>source_location_key</name>
-        <field>source_location_key</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>merchant_id</name>
-        <rename>merchant_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>source_location_key</name>
-        <rename>source_location_key</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>country_code</name>
-        <rename>country_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>city</name>
-        <rename>city</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>state</name>
-        <rename>state</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>postal_code</name>
-        <rename>postal_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>latitude</name>
-        <rename>latitude</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>longitude</name>
-        <rename>longitude</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>active_flag</name>
-        <rename>active_flag</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>

@@ -135,7 +135,7 @@ SELECT
     ml.merchant_id,
     ml.country_code AS merchant_country_code,
     ml.city AS merchant_city,
-    ml.state AS merchant_state,
+    ml.region_code AS merchant_region_code,
     ml.postal_code AS merchant_postal_code,
 
     t.category_id,
