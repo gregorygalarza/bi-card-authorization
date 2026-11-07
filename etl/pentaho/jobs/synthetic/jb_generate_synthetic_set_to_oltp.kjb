@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>jb_generate_synthetic_set_to_oltp</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <job_status>0</job_status>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2026/11/07 02:24:22.139</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2026/11/07 02:24:22.139</modified_date>
+  <parameters>
+    <parameter>
+      <name>P_SET_CODE</name>
+      <default_value>SYNTH_SET_02</default_value>
+      <description>Código del dataset sintético a procesar</description>
+    </parameter>
+  </parameters>
+  <connection>
+    <name>cards_oltp</name>
+    <server>${BI_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${BI_OLTP_DB}</database>
+    <port>${BI_DB_PORT}</port>
+    <username>${BI_DB_USER}</username>
+    <password>${BI_DB_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${BI_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Start</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>64</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>01-customers</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_customers_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>02-customer_addresses</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_customer_addresses_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>03-financial_profiles</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_financial_profiles_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>736</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>04-cards</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_cards_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>05-merchants</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_merchants_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>06-merchant_locations</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_merchant_locations_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>736</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>07-transactions</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_transactions_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>08-transactions_errors</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\synthetic\tr_generate_synthetic_transaction_errors_to_oltp.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>64</xloc>
+      <yloc>336</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>09-validate_oltp</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>DO $$
+DECLARE
+    v_set_code             text := UPPER(BTRIM('${P_SET_CODE}'));
+    v_source_system_id     smallint;
+    v_key_prefix           text;
+
+    v_target_customers     bigint;
+    v_target_cards         bigint;
+    v_target_merchants     bigint;
+    v_target_locations     bigint;
+    v_target_transactions  bigint;
+
+    v_date_from            date;
+    v_date_to              date;
+    v_batch_id             bigint;
+
+    v_actual               bigint;
+    v_invalid              bigint;
+    v_batch_status         text;
+BEGIN
+
+    -- --------------------------------------------------------
+    -- 1. Contexto del dataset
+    -- --------------------------------------------------------
+
+    SELECT
+        ss.source_system_id,
+        d.key_prefix,
+        d.target_customers,
+        d.target_cards,
+        d.target_merchants,
+        d.target_locations,
+        d.target_transactions,
+        d.transaction_date_from,
+        d.transaction_date_to,
+        d.oltp_last_batch_id
+    INTO
+        v_source_system_id,
+        v_key_prefix,
+        v_target_customers,
+        v_target_cards,
+        v_target_merchants,
+        v_target_locations,
+        v_target_transactions,
+        v_date_from,
+        v_date_to,
+        v_batch_id
+    FROM ctl.synthetic_dataset d
+    JOIN oltp.source_system ss
+      ON ss.source_code = d.source_system_code
+    WHERE d.set_code = v_set_code
+      AND d.oltp_status = 'LOADING'
+      AND d.olap_status = 'PENDING';
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION
+            'Dataset % no existe o no está en LOADING/PENDING',
+            v_set_code;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 2. Batch
+    -- --------------------------------------------------------
+
+    SELECT status
+    INTO v_batch_status
+    FROM ctl.etl_batch
+    WHERE batch_id = v_batch_id;
+
+    IF v_batch_status IS DISTINCT FROM 'RUNNING' THEN
+        RAISE EXCEPTION
+            'Batch % debe estar RUNNING. Estado actual=%',
+            v_batch_id,
+            v_batch_status;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 3. Customers
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.customer c
+    WHERE c.source_system_id = v_source_system_id
+      AND c.source_customer_key
+          LIKE v_key_prefix || ':CUSTOMER:%';
+
+    IF v_actual &lt;&gt; v_target_customers THEN
+        RAISE EXCEPTION
+            'Customers: esperado %, encontrado %',
+            v_target_customers,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 4. Customer addresses
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.customer_address ca
+    JOIN oltp.customer c
+      ON c.customer_id = ca.customer_id
+    WHERE c.source_system_id = v_source_system_id
+      AND c.source_customer_key
+          LIKE v_key_prefix || ':CUSTOMER:%';
+
+    IF v_actual &lt;&gt; v_target_customers THEN
+        RAISE EXCEPTION
+            'Customer addresses: esperado %, encontrado %',
+            v_target_customers,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 5. Financial profiles
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.customer_financial_profile fp
+    JOIN oltp.customer c
+      ON c.customer_id = fp.customer_id
+    WHERE c.source_system_id = v_source_system_id
+      AND c.source_customer_key
+          LIKE v_key_prefix || ':CUSTOMER:%';
+
+    IF v_actual &lt;&gt; v_target_customers THEN
+        RAISE EXCEPTION
+            'Financial profiles: esperado %, encontrado %',
+            v_target_customers,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 6. Cards
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card c
+    WHERE c.source_system_id = v_source_system_id
+      AND c.source_card_key
+          LIKE v_key_prefix || ':CARD:%';
+
+    IF v_actual &lt;&gt; v_target_cards THEN
+        RAISE EXCEPTION
+            'Cards: esperado %, encontrado %',
+            v_target_cards,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 7. Merchants
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.merchant m
+    WHERE m.source_system_id = v_source_system_id
+      AND m.source_merchant_key
+          LIKE v_key_prefix || ':MERCHANT:%';
+
+    IF v_actual &lt;&gt; v_target_merchants THEN
+        RAISE EXCEPTION
+            'Merchants: esperado %, encontrado %',
+            v_target_merchants,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 8. Merchant locations
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.merchant_location ml
+    JOIN oltp.merchant m
+      ON m.merchant_id = ml.merchant_id
+    WHERE m.source_system_id = v_source_system_id
+      AND m.source_merchant_key
+          LIKE v_key_prefix || ':MERCHANT:%';
+
+    IF v_actual &lt;&gt; v_target_locations THEN
+        RAISE EXCEPTION
+            'Merchant locations: esperado %, encontrado %',
+            v_target_locations,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 9. Transactions
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+    IF v_actual &lt;&gt; v_target_transactions THEN
+        RAISE EXCEPTION
+            'Transactions: esperado %, encontrado %',
+            v_target_transactions,
+            v_actual;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 10. Unicidad de source_transaction_key
+    -- --------------------------------------------------------
+
+    SELECT
+        COUNT(*) - COUNT(DISTINCT t.source_transaction_key)
+    INTO v_invalid
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+    IF v_invalid &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Se encontraron % source_transaction_key duplicadas',
+            v_invalid;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 11. Rango temporal
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_invalid
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND (
+          (t.transaction_datetime AT TIME ZONE 'UTC')::date
+              &lt; v_date_from
+          OR
+          (t.transaction_datetime AT TIME ZONE 'UTC')::date
+              > v_date_to
+      );
+
+    IF v_invalid &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Transacciones fuera del periodo configurado: %',
+            v_invalid;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 12. Semántica DECLINED / decline_reason
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_invalid
+    FROM oltp.card_transaction t
+    JOIN oltp.authorization_status aus
+      ON aus.authorization_status_id =
+         t.authorization_status_id
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND (
+          (
+              aus.status_code = 'DECLINED'
+              AND t.decline_reason_id IS NULL
+          )
+          OR
+          (
+              aus.status_code &lt;&gt; 'DECLINED'
+              AND t.decline_reason_id IS NOT NULL
+          )
+      );
+
+    IF v_invalid &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Filas inválidas status/decline_reason: %',
+            v_invalid;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 13. error_flag vs transaction_error
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_invalid
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND t.error_flag IS DISTINCT FROM EXISTS (
+          SELECT 1
+          FROM oltp.transaction_error te
+          WHERE te.transaction_id = t.transaction_id
+      );
+
+    IF v_invalid &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Filas inconsistentes error_flag/transaction_error: %',
+            v_invalid;
+    END IF;
+
+
+    -- --------------------------------------------------------
+    -- 14. Monto cero
+    -- --------------------------------------------------------
+
+    SELECT COUNT(*)
+    INTO v_invalid
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND t.amount = 0;
+
+    IF v_invalid &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Transacciones con amount=0: %',
+            v_invalid;
+    END IF;
+
+
+    RAISE NOTICE
+        'VALIDACION OLTP OK: set=%, batch=%, transactions=%',
+        v_set_code,
+        v_batch_id,
+        v_target_transactions;
+
+END
+$$;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>10-close_batch</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>WITH cfg AS (
+    SELECT
+        d.set_code,
+        d.source_system_code,
+        d.key_prefix,
+        d.target_customers,
+        d.target_cards,
+        d.target_merchants,
+        d.target_locations,
+        d.target_transactions,
+        d.oltp_last_batch_id,
+        ss.source_system_id
+    FROM ctl.synthetic_dataset d
+    JOIN oltp.source_system ss
+      ON ss.source_code = d.source_system_code
+    JOIN ctl.etl_batch b
+      ON b.batch_id = d.oltp_last_batch_id
+     AND b.status = 'RUNNING'
+    WHERE d.set_code = UPPER(BTRIM('${P_SET_CODE}'))
+      AND d.oltp_status = 'LOADING'
+      AND d.olap_status = 'PENDING'
+),
+
+err AS (
+    SELECT
+        COUNT(*) AS error_occurrences
+    FROM cfg
+    JOIN oltp.card_transaction t
+      ON t.source_system_id = cfg.source_system_id
+     AND t.source_transaction_key
+         LIKE cfg.key_prefix || ':TX:%'
+    JOIN oltp.transaction_error te
+      ON te.transaction_id = t.transaction_id
+),
+
+validated AS (
+    UPDATE ctl.synthetic_dataset d
+    SET
+        oltp_status = 'VALIDATED',
+        updated_at = CURRENT_TIMESTAMP
+    FROM cfg
+    WHERE d.set_code = cfg.set_code
+    RETURNING
+        d.set_code,
+        d.oltp_last_batch_id
+)
+
+UPDATE ctl.etl_batch b
+SET
+    status = 'SUCCESS',
+    end_ts = CURRENT_TIMESTAMP,
+
+    rows_read = cfg.target_transactions,
+
+    rows_loaded =
+          cfg.target_customers
+        + cfg.target_customers
+        + cfg.target_customers
+        + cfg.target_cards
+        + cfg.target_merchants
+        + cfg.target_locations
+        + cfg.target_transactions
+        + err.error_occurrences,
+
+    rows_rejected = 0,
+    error_message = NULL
+
+FROM cfg
+CROSS JOIN err
+JOIN validated v
+  ON v.oltp_last_batch_id = cfg.oltp_last_batch_id
+
+WHERE b.batch_id = cfg.oltp_last_batch_id
+
+RETURNING
+    b.batch_id,
+    b.process_name,
+    b.status,
+    b.rows_read,
+    b.rows_loaded,
+    b.rows_rejected,
+    b.start_ts,
+    b.end_ts;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>64</xloc>
+      <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>99-mark_batch_failed</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>UPDATE ctl.etl_batch b
+SET
+    status = 'FAILED',
+    end_ts = CURRENT_TIMESTAMP,
+    rows_rejected = COALESCE(rows_rejected, 0),
+    error_message =
+        'Fallo en jb_generate_synthetic_set_to_oltp. Revisar log de Pentaho PDI.'
+FROM ctl.synthetic_dataset d
+WHERE d.set_code = UPPER(BTRIM('${P_SET_CODE}'))
+  AND d.oltp_last_batch_id = b.batch_id
+  AND b.status = 'RUNNING';</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>656</xloc>
+      <yloc>480</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>failure</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>480</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>00-open_batch</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>WITH ds AS (
+    SELECT
+        d.set_code,
+        d.source_system_code,
+        d.oltp_status,
+        d.olap_status,
+        d.oltp_last_batch_id,
+        b.status AS previous_batch_status
+    FROM ctl.synthetic_dataset d
+    LEFT JOIN ctl.etl_batch b
+      ON b.batch_id = d.oltp_last_batch_id
+    WHERE d.set_code = UPPER(BTRIM('${P_SET_CODE}'))
+      AND d.olap_status = 'PENDING'
+      AND (
+            d.oltp_status = 'PREPARED'
+            OR
+            (
+                d.oltp_status = 'LOADING'
+                AND b.status = 'FAILED'
+            )
+          )
+    FOR UPDATE OF d
+),
+
+new_batch AS (
+    INSERT INTO ctl.etl_batch (
+        process_name,
+        source_system,
+        status
+    )
+    SELECT
+        'GENERATE_SYNTHETIC_SET_TO_OLTP',
+        ds.source_system_code,
+        'RUNNING'
+    FROM ds
+    RETURNING batch_id
+),
+
+upd AS (
+    UPDATE ctl.synthetic_dataset d
+    SET
+        oltp_status = 'LOADING',
+        oltp_last_batch_id = nb.batch_id,
+        updated_at = CURRENT_TIMESTAMP
+    FROM ds
+    CROSS JOIN new_batch nb
+    WHERE d.set_code = ds.set_code
+    RETURNING
+        d.set_code,
+        d.oltp_status,
+        d.olap_status,
+        d.oltp_last_batch_id
+)
+
+SELECT
+    u.set_code,
+    u.oltp_status,
+    u.olap_status,
+    u.oltp_last_batch_id
+FROM upd u;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>48</yloc>
+      <attributes_kjc/>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>01-customers</from>
+      <to>02-customer_addresses</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>02-customer_addresses</from>
+      <to>03-financial_profiles</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>03-financial_profiles</from>
+      <to>04-cards</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>04-cards</from>
+      <to>05-merchants</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>05-merchants</from>
+      <to>06-merchant_locations</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>06-merchant_locations</from>
+      <to>07-transactions</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>07-transactions</from>
+      <to>08-transactions_errors</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>08-transactions_errors</from>
+      <to>09-validate_oltp</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>09-validate_oltp</from>
+      <to>10-close_batch</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>10-close_batch</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>99-mark_batch_failed</from>
+      <to>failure</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>01-customers</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>02-customer_addresses</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>03-financial_profiles</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>04-cards</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>09-validate_oltp</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>08-transactions_errors</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>07-transactions</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>06-merchant_locations</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>05-merchants</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>10-close_batch</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>00-open_batch</from>
+      <to>01-customers</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Start</from>
+      <to>00-open_batch</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>00-open_batch</from>
+      <to>99-mark_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes/>
+</job>

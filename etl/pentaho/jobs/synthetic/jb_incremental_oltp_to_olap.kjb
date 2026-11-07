@@ -1,0 +1,1369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>jb_incremental_oltp_to_olap</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <job_status>0</job_status>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2026/11/07 04:10:49.124</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2026/11/07 04:10:49.124</modified_date>
+  <parameters>
+    <parameter>
+      <name>P_SET_CODE</name>
+      <default_value>SYNTH_SET_02</default_value>
+      <description>Código del dataset sintético a cargar incrementalmente a OLAP</description>
+    </parameter>
+  </parameters>
+  <connection>
+    <name>cards_oltp</name>
+    <server>${BI_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${BI_OLTP_DB}</database>
+    <port>${BI_DB_PORT}</port>
+    <username>${BI_DB_USER}</username>
+    <password>${BI_DB_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${BI_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Start</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>00-open_olap_batch</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>SELECT *
+FROM ctl.fn_prepare_synthetic_olap_load(
+    UPPER(BTRIM('${P_SET_CODE}'))
+);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>01-dim_customer</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\olap\tr_load_dim_customer_incremental_to_olap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>448</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>02-dim_card</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\olap\tr_load_dim_card_incremental_to_olap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>03-dim_merchant</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\olap\tr_load_dim_merchant_incremental_to_olap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>04-dim_merchant_location</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\olap\tr_load_dim_merchant_location_incremental_to_olap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>960</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>05-preflight_fact</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>DO $$
+DECLARE
+    v_set_code              text := UPPER(BTRIM('${P_SET_CODE}'));
+    v_source_system_code    text;
+    v_source_system_id      smallint;
+    v_key_prefix            text;
+    v_target_transactions   bigint;
+
+    v_actual                bigint;
+BEGIN
+
+    SELECT
+        d.source_system_code,
+        ss.source_system_id,
+        d.key_prefix,
+        d.target_transactions
+    INTO
+        v_source_system_code,
+        v_source_system_id,
+        v_key_prefix,
+        v_target_transactions
+    FROM ctl.synthetic_dataset d
+    JOIN oltp.source_system ss
+      ON ss.source_code = d.source_system_code
+    WHERE d.set_code = v_set_code
+      AND d.oltp_status = 'VALIDATED'
+      AND d.olap_status = 'LOADING';
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION
+            'Dataset % no está en VALIDATED/LOADING',
+            v_set_code;
+    END IF;
+
+
+    -- source transactions
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+    IF v_actual &lt;&gt; v_target_transactions THEN
+        RAISE EXCEPTION
+            'Source transactions: esperado %, encontrado %',
+            v_target_transactions,
+            v_actual;
+    END IF;
+
+
+    -- existing facts: must be zero
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM olap.fact_transaction f
+    WHERE f.source_system_code = v_source_system_code
+      AND f.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Ya existen % facts para %',
+            v_actual,
+            v_set_code;
+    END IF;
+
+
+    -- missing dates
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    LEFT JOIN olap.dim_date dd
+      ON dd.full_date =
+         (t.transaction_datetime AT TIME ZONE 'UTC')::date
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND dd.date_key IS NULL;
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION 'Missing date keys: %', v_actual;
+    END IF;
+
+
+    -- missing customer
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    JOIN oltp.card c
+      ON c.card_id = t.card_id
+    JOIN oltp.customer cu
+      ON cu.customer_id = c.customer_id
+    LEFT JOIN olap.dim_customer dc
+      ON dc.source_system_code = v_source_system_code
+     AND dc.source_customer_key = cu.source_customer_key
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND dc.customer_key IS NULL;
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION 'Missing customer keys: %', v_actual;
+    END IF;
+
+
+    -- missing card
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    JOIN oltp.card c
+      ON c.card_id = t.card_id
+    LEFT JOIN olap.dim_card dc
+      ON dc.source_system_code = v_source_system_code
+     AND dc.source_card_key = c.source_card_key
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND dc.card_key IS NULL;
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION 'Missing card keys: %', v_actual;
+    END IF;
+
+
+    -- missing merchant/location
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    JOIN oltp.merchant_location ml
+      ON ml.location_id = t.merchant_location_id
+    JOIN oltp.merchant m
+      ON m.merchant_id = ml.merchant_id
+    LEFT JOIN olap.dim_merchant dm
+      ON dm.source_system_code = v_source_system_code
+     AND dm.source_merchant_key = m.source_merchant_key
+    LEFT JOIN olap.dim_merchant_location dml
+      ON dml.source_system_code = v_source_system_code
+     AND dml.source_location_key = ml.source_location_key
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND (
+          dm.merchant_key IS NULL
+          OR dml.merchant_location_key IS NULL
+      );
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION
+            'Missing merchant/location keys: %',
+            v_actual;
+    END IF;
+
+
+    -- missing MCC
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    JOIN oltp.merchant_category mc
+      ON mc.category_id = t.category_id
+    LEFT JOIN olap.dim_merchant_category dmc
+      ON dmc.category_scheme = mc.category_scheme
+     AND dmc.mcc_code = mc.category_code
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND dmc.merchant_category_key IS NULL;
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION 'Missing MCC keys: %', v_actual;
+    END IF;
+
+
+    -- status
+    SELECT COUNT(*)
+    INTO v_actual
+    FROM oltp.card_transaction t
+    JOIN oltp.authorization_status s
+      ON s.authorization_status_id =
+         t.authorization_status_id
+    LEFT JOIN olap.dim_authorization_status ds
+      ON ds.status_code = s.status_code
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%'
+      AND ds.authorization_status_key IS NULL;
+
+    IF v_actual &lt;&gt; 0 THEN
+        RAISE EXCEPTION 'Missing status keys: %', v_actual;
+    END IF;
+
+
+    RAISE NOTICE
+        'PREFLIGHT FACT OK: set=%, transactions=%',
+        v_set_code,
+        v_target_transactions;
+
+END
+$$;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>960</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>06-fact_transaction</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}\..\..\transformations\olap\tr_load_fact_transaction_incremental_to_olap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SET_CODE</name>
+          <stream_name/>
+          <value>${P_SET_CODE}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>07-validate_olap</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>DO $$
+DECLARE
+    v_set_code              text := UPPER(BTRIM('${P_SET_CODE}'));
+    v_source_system_code    text;
+    v_source_system_id      smallint;
+    v_key_prefix            text;
+    v_target_transactions   bigint;
+
+    v_oltp_count            bigint;
+    v_olap_count            bigint;
+
+    v_oltp_amount           numeric(30,2);
+    v_olap_amount           numeric(30,2);
+
+    v_oltp_declined         bigint;
+    v_olap_declined         bigint;
+
+    v_oltp_error_flag       bigint;
+    v_olap_error_flag       bigint;
+
+    v_oltp_fraud_flag       bigint;
+    v_olap_fraud_flag       bigint;
+
+    v_oltp_intl             bigint;
+    v_olap_intl             bigint;
+
+    v_oltp_intl_declined    bigint;
+    v_olap_intl_declined    bigint;
+
+    v_ibm_facts             bigint;
+BEGIN
+
+    SELECT
+        d.source_system_code,
+        ss.source_system_id,
+        d.key_prefix,
+        d.target_transactions
+    INTO
+        v_source_system_code,
+        v_source_system_id,
+        v_key_prefix,
+        v_target_transactions
+    FROM ctl.synthetic_dataset d
+    JOIN oltp.source_system ss
+      ON ss.source_code = d.source_system_code
+    WHERE d.set_code = v_set_code
+      AND d.oltp_status = 'VALIDATED'
+      AND d.olap_status = 'LOADING';
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION
+            'Dataset % no está en VALIDATED/LOADING',
+            v_set_code;
+    END IF;
+
+
+    SELECT
+        COUNT(*),
+        ROUND(SUM(t.amount),2),
+        COUNT(*) FILTER (
+            WHERE aus.status_code = 'DECLINED'
+        ),
+        COUNT(*) FILTER (
+            WHERE t.error_flag
+        ),
+        COUNT(*) FILTER (
+            WHERE t.fraud_flag
+        ),
+        COUNT(*) FILTER (
+            WHERE c.issuer_country_code &lt;&gt; ml.country_code
+              AND c.issuer_country_code &lt;&gt; 'ZZ'
+              AND ml.country_code &lt;&gt; 'ZZ'
+        ),
+        COUNT(*) FILTER (
+            WHERE c.issuer_country_code &lt;&gt; ml.country_code
+              AND c.issuer_country_code &lt;&gt; 'ZZ'
+              AND ml.country_code &lt;&gt; 'ZZ'
+              AND aus.status_code = 'DECLINED'
+        )
+    INTO
+        v_oltp_count,
+        v_oltp_amount,
+        v_oltp_declined,
+        v_oltp_error_flag,
+        v_oltp_fraud_flag,
+        v_oltp_intl,
+        v_oltp_intl_declined
+    FROM oltp.card_transaction t
+    JOIN oltp.card c
+      ON c.card_id = t.card_id
+    JOIN oltp.merchant_location ml
+      ON ml.location_id = t.merchant_location_id
+    JOIN oltp.authorization_status aus
+      ON aus.authorization_status_id =
+         t.authorization_status_id
+    WHERE t.source_system_id = v_source_system_id
+      AND t.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+
+    SELECT
+        COUNT(*),
+        ROUND(SUM(f.amount),2),
+        COUNT(*) FILTER (
+            WHERE f.declined_flag
+        ),
+        COUNT(*) FILTER (
+            WHERE f.error_flag
+        ),
+        COUNT(*) FILTER (
+            WHERE f.fraud_flag
+        ),
+        COUNT(*) FILTER (
+            WHERE f.international_flag IS TRUE
+        ),
+        COUNT(*) FILTER (
+            WHERE f.international_flag IS TRUE
+              AND f.declined_flag
+        )
+    INTO
+        v_olap_count,
+        v_olap_amount,
+        v_olap_declined,
+        v_olap_error_flag,
+        v_olap_fraud_flag,
+        v_olap_intl,
+        v_olap_intl_declined
+    FROM olap.fact_transaction f
+    WHERE f.source_system_code = v_source_system_code
+      AND f.source_transaction_key
+          LIKE v_key_prefix || ':TX:%';
+
+
+    IF v_oltp_count &lt;&gt; v_target_transactions
+       OR v_olap_count &lt;&gt; v_target_transactions
+    THEN
+        RAISE EXCEPTION
+            'Count mismatch. Target %, OLTP %, OLAP %',
+            v_target_transactions,
+            v_oltp_count,
+            v_olap_count;
+    END IF;
+
+
+    IF v_oltp_amount &lt;&gt; v_olap_amount THEN
+        RAISE EXCEPTION
+            'Amount mismatch. OLTP %, OLAP %',
+            v_oltp_amount,
+            v_olap_amount;
+    END IF;
+
+
+    IF v_oltp_declined &lt;&gt; v_olap_declined THEN
+        RAISE EXCEPTION
+            'Declined mismatch. OLTP %, OLAP %',
+            v_oltp_declined,
+            v_olap_declined;
+    END IF;
+
+
+    IF v_oltp_error_flag &lt;&gt; v_olap_error_flag THEN
+        RAISE EXCEPTION
+            'error_flag mismatch. OLTP %, OLAP %',
+            v_oltp_error_flag,
+            v_olap_error_flag;
+    END IF;
+
+
+    IF v_oltp_fraud_flag &lt;&gt; v_olap_fraud_flag THEN
+        RAISE EXCEPTION
+            'fraud_flag mismatch. OLTP %, OLAP %',
+            v_oltp_fraud_flag,
+            v_olap_fraud_flag;
+    END IF;
+
+
+    IF v_oltp_intl &lt;&gt; v_olap_intl THEN
+        RAISE EXCEPTION
+            'International mismatch. OLTP %, OLAP %',
+            v_oltp_intl,
+            v_olap_intl;
+    END IF;
+
+
+    IF v_oltp_intl_declined &lt;&gt; v_olap_intl_declined THEN
+        RAISE EXCEPTION
+            'International declined mismatch. OLTP %, OLAP %',
+            v_oltp_intl_declined,
+            v_olap_intl_declined;
+    END IF;
+
+
+    -- IBM_CORE must remain untouched
+    SELECT COUNT(*)
+    INTO v_ibm_facts
+    FROM olap.fact_transaction
+    WHERE source_system_code = 'IBM_CORE';
+
+    IF v_ibm_facts &lt;&gt; 24366687 THEN
+        RAISE EXCEPTION
+            'IBM_CORE fue modificado. Esperado 24366687, encontrado %',
+            v_ibm_facts;
+    END IF;
+
+
+    UPDATE ctl.synthetic_dataset
+    SET
+        olap_status = 'VALIDATED',
+        updated_at = CURRENT_TIMESTAMP
+    WHERE set_code = v_set_code
+      AND olap_status = 'LOADING';
+
+
+    RAISE NOTICE
+        'VALIDACION OLAP OK: set=%, facts=%, amount=%',
+        v_set_code,
+        v_olap_count,
+        v_olap_amount;
+
+END
+$$;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>08-close_olap_batch</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>WITH cfg AS (
+    SELECT
+        d.set_code,
+        d.source_system_code,
+        d.key_prefix,
+        d.target_customers,
+        d.target_cards,
+        d.target_merchants,
+        d.target_locations,
+        d.target_transactions,
+        d.olap_last_batch_id
+    FROM ctl.synthetic_dataset d
+    JOIN ctl.etl_batch b
+      ON b.batch_id = d.olap_last_batch_id
+     AND b.status = 'RUNNING'
+    WHERE d.set_code = UPPER(BTRIM('${P_SET_CODE}'))
+      AND d.oltp_status = 'VALIDATED'
+      AND d.olap_status = 'VALIDATED'
+)
+
+UPDATE ctl.etl_batch b
+SET
+    status = 'SUCCESS',
+    end_ts = CURRENT_TIMESTAMP,
+
+    rows_read =
+        cfg.target_transactions,
+
+    rows_loaded =
+          cfg.target_customers
+        + cfg.target_cards
+        + cfg.target_merchants
+        + cfg.target_locations
+        + cfg.target_transactions,
+
+    rows_rejected = 0,
+    error_message = NULL
+
+FROM cfg
+WHERE b.batch_id = cfg.olap_last_batch_id
+
+RETURNING
+    b.batch_id,
+    b.process_name,
+    b.source_system,
+    b.status,
+    b.rows_read,
+    b.rows_loaded,
+    b.rows_rejected,
+    b.start_ts,
+    b.end_ts;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>448</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>99-mark_olap_batch_failed</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>UPDATE ctl.etl_batch b
+SET
+    status = 'FAILED',
+    end_ts = CURRENT_TIMESTAMP,
+    rows_rejected = COALESCE(rows_rejected, 0),
+    error_message =
+        'Fallo en jb_incremental_oltp_to_olap. Revisar log de Pentaho PDI.'
+FROM ctl.synthetic_dataset d
+WHERE d.set_code = UPPER(BTRIM('${P_SET_CODE}'))
+  AND d.olap_last_batch_id = b.batch_id
+  AND b.status = 'RUNNING';</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>cards_oltp</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>368</xloc>
+      <yloc>432</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>FAILURE</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>432</yloc>
+      <attributes_kjc/>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>00-open_olap_batch</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>00-open_olap_batch</from>
+      <to>01-dim_customer</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>01-dim_customer</from>
+      <to>02-dim_card</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>02-dim_card</from>
+      <to>03-dim_merchant</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>03-dim_merchant</from>
+      <to>04-dim_merchant_location</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>04-dim_merchant_location</from>
+      <to>05-preflight_fact</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>05-preflight_fact</from>
+      <to>06-fact_transaction</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>06-fact_transaction</from>
+      <to>07-validate_olap</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>07-validate_olap</from>
+      <to>08-close_olap_batch</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>08-close_olap_batch</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>99-mark_olap_batch_failed</from>
+      <to>FAILURE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>00-open_olap_batch</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>01-dim_customer</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>02-dim_card</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>03-dim_merchant</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>04-dim_merchant_location</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>05-preflight_fact</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>06-fact_transaction</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>07-validate_olap</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>08-close_olap_batch</from>
+      <to>99-mark_olap_batch_failed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes/>
+</job>
